@@ -1,0 +1,11 @@
+{
+  "name": "drag-size-dom",
+  "version": "1.0.0",
+  "description": "Drag and resize dom nodes",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Tyler R Smith",
+  "license": "MIT"
+}
