@@ -1,5 +1,4 @@
 import {q1s as a} from './lib/q1s.js'
-import {add_jscss_to_element} from '/imports/lib/js_to_css';
 import {q1s_form as _form} from './lib/Elements/Form/q1s_form.js'
 import {q1s_input as _input} from './lib/Elements/Form/q1s_input.js'
 import {q1s_checkbox as _checkbox, checkbox_input as cx_input} from './lib/Elements/Form/q1s_checkbox.js'
@@ -29,11 +28,5 @@ export default class xq1s extends q1s {
     constructor(obj){
         super(obj);
         //console.log(this);
-    }
-}
-
-if (HTMLElement) {
-    HTMLElement.prototype.add_jscss = function (obj) {
-        add_jscss_to_element(obj, this);
     }
 }
