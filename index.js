@@ -10,6 +10,9 @@ import {q1s_dragable as drag} from './lib/Elements/Maliable/Dragable.js'
 import {q1s_imageWithTitle as imtitle} from './lib/Elements/Gallery/imageWithTitle'
 import {q1s_gallery as gallery} from './lib/Elements/Gallery/Gallery'
 
+import input_styles from './lib/css/q1s_inputs.js'
+import checkbox_styles from './lib/css/q1s_checkboxes.js'
+
 export const q1s = a;
 export const q1s_form = _form;
 export const q1s_input = _input;
@@ -23,6 +26,8 @@ export const q1s_drag = drag;
 export const q1s_imageWithTitle = imtitle;
 export const q1s_gallery = gallery;
 
+export const q1s_css_inputStyles = input_styles;
+export const q1s_css_checkbox_styles = checkbox_styles;
 
 export default class xq1s extends q1s {
     constructor(obj){
