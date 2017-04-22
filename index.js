@@ -1,37 +1,74 @@
-import {q1s as a} from './lib/q1s.js'
-import {q1s_form as _form} from './lib/Elements/Form/q1s_form.js'
-import {q1s_input as _input} from './lib/Elements/Form/q1s_input.js'
-import {q1s_checkbox as _checkbox, checkbox_input as cx_input} from './lib/Elements/Form/q1s_checkbox.js'
-import {q1s_many_checkboxes as many_checkbox} from './lib/Elements/Form/q1s_many_checkboxes.js' 
-import {q1s_select as _select} from './lib/Elements/Form/q1s_select.js'
-import {q1s_fileinput as _file} from './lib/Elements/Form/q1s_fileinput.js'
-import {q1s_hiddenInput as hidden} from './lib/Elements/Form/q1s_hidden.js'
-import {q1s_dragable as drag} from './lib/Elements/Maliable/Dragable.js'
-import {q1s_imageWithTitle as imtitle} from './lib/Elements/Gallery/imageWithTitle'
-import {q1s_gallery as gallery} from './lib/Elements/Gallery/Gallery'
+const Q1S = require('./lib/q1s.js').q1s;
+const _ = require('underscore');
 
-import input_styles from './lib/css/q1s_inputs.js'
-import checkbox_styles from './lib/css/q1s_checkboxes.js'
-
-export const q1s = a;
-export const q1s_form = _form;
-export const q1s_input = _input;
-export const q1s_checkbox = _checkbox;
-export const q1s_many_checkbox = many_checkbox;
-export const checkbox_input = cx_input;
-export const q1s_select = _select;
-export const q1s_fileinput = _file;
-export const q1s_hiddenInput = hidden;
-export const q1s_drag = drag;
-export const q1s_imageWithTitle = imtitle;
-export const q1s_gallery = gallery;
-
-export const q1s_css_inputStyles = input_styles;
-export const q1s_css_checkbox_styles = checkbox_styles;
-
-export default class xq1s extends q1s {
-    constructor(obj){
+class LayoutY extends Q1S {
+    constructor(obj) {
         super(obj);
-        //console.log(this);
+        this.addFunctionToCallback(function constructLayoutY() {
+            this.heightPercentage = obj.heightPercentage || 1; // function or number;
+            this.fixedReducedHeight = obj.fixedReducedHeight || 0; // function or number;
+            if (this.heightPercentage === 1 && this.fixedReducedHeight > 0){
+                this.style.height = `calc(100% - ${this.fixedReducedHeight}px)`;
+            } else {
+                this.windowChange = () => {
+                    const fixedReducedHeight = (typeof this.fixedReducedHeight === 'function') ?
+                        this.fixedReducedHeight() :
+                        this.fixedReducedHeight;
+                    const heightPercentage = (typeof this.heightPercentage === 'function') ?
+                        this.heightPercentage() :
+                        this.heightPercentage;
+                    const height = (typeof this.maxHeight === 'function') ?
+                        this.maxHeight() :
+                    this.maxHeight ||
+                        document.body.clientHeight;
+                    if (heightPercentage === 1 && fixedReducedHeight > 0) {
+                        this.style.height = `calc(100% - ${fixedReducedHeight}px)`;
+                    } else {
+                        const elemHeight = (height - fixedReducedHeight) * heightPercentage;
+                        this.style.height = elemHeight + "px";
+                    }
+                };
+                window.addEventListener('resize', this.windowChange);
+                this.windowChange();
+            }
+        });
     }
+}
+
+class LayoutMinusX extends LayoutY {
+    constructor(obj) {
+        super(obj);
+        this.addFunctionToCallback(function () {
+            this.fixedReducedHeight = () => {
+                let reduce = 0;
+                const _ = require('underscore');
+
+                _.each(this.minus, (value) => {
+
+                    if (_.isElement(value)) {
+                        reduce += value.clientHeight;
+                    }
+                });
+                return reduce;
+            };
+        });
+    }
+}
+
+
+module.exports = {
+    Q1S: Q1S,
+    Q1SForm: require('./lib/Elements/Form/q1s_form.js').q1s_form,
+    Q1SInput: require('./lib/Elements/Form/q1s_input.js').q1s_input,
+    Q1SCheckbox: require('./lib/Elements/Form/q1s_checkbox').checkbox_input,
+    Q1SManyCheckbox: require('./lib/Elements/Form/q1s_many_checkboxes').q1s_many_checkboxes,
+    Q1SSelect: require('./lib/Elements/Form/q1s_select').q1s_select,
+    Q1SFileInput: require("./lib/Elements/Form/q1s_fileinput").q1s_fileinput,
+    Q1SHiddenInput: require('./lib/Elements/Form/q1s_hidden').q1s_hiddenInput,
+    Q1SDrag: require('./lib/Elements/Maliable/Dragable').q1s_dragable,
+    Q1SImageWithTitle: require('./lib/Elements/Gallery/imageWithTitle').q1s_imageWithTitle,
+    Q1SGallery: require("./lib/Elements/Gallery/Gallery").q1s_gallery,
+    Q1SMenu: require("./lib/Elements/navigation/menu").Q1SMenu,
+    Q1SLayoutY:LayoutY,
+    Q1SLayoutMinusX:LayoutMinusX,
 }
