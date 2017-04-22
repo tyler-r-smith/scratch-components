@@ -1,0 +1,56 @@
+@import "_variables";
+checkboxes-many {
+  width: 100%;
+  height: auto;
+  padding: 10px 5px;
+  margin: 4px auto;
+  border-radius: 5px;
+  float: left;
+  box-sizing: border-box;
+  background-color: $highlight;
+}
+
+.q1sInput.q1sCheckbox::shadow {
+  .form_input_wrapper {
+    width: 100%;
+    height: auto;
+    padding: 10px 5px;
+    margin: 4px auto;
+    border-radius: 5px;
+    float: left;
+    box-sizing: border-box;
+  }
+
+  .form_input_wrapper select {
+    margin: 3px auto;
+    padding: 10px;
+    display: block;
+    width: 100%;
+    font-size: 1em;
+    box-sizing: border-box;
+  }
+
+  .form_input_helpertext {
+    display: none;
+  }
+
+  .form_input_wrapper_checkbox {
+    display: inline-block;
+    width: auto;
+  }
+
+  .form_input_wrapper_checkbox .form_input_label {
+    font-size: 1em;
+  }
+
+  .form_input_checkbox {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+  }
+
+  .form_input_label {
+    cursor: pointer;
+    vertical-align: top;
+  }
+}
