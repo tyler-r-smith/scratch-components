@@ -1,4 +1,7 @@
-# q1s Components
+# Scratch Components
+
+This is the beta version of scratch componetns, formaly known as q1s. 
+Updates coming soon.
 
 q1s Components is a web component framework. It allows for easy creation of html templates, and css using the web component standard.
 
