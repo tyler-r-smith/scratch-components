@@ -1,8 +1,8 @@
-#q1s Components
+# q1s Components
 
 q1s Components is a web component framework. It allows for easy creation of html templates, and css using the web component standard.
 
-####List of included components
+#### List of included components
 
 Component | Function | Base Component    
 :------------- |:-------------|:-------------
@@ -40,7 +40,7 @@ Produces:
   </body>
 </html>
 ~~~
-##q1s methods
+## q1s methods
 |Methods|Parameters|Use|Attached to constructed elements|
 |:----|:----|:----|:----|
 |construct|object|construct a dom element from the class|false|
@@ -59,20 +59,20 @@ Produces:
 |insertManyBefore|array, node|insert many elements before node|true|
 |isQ1s|none|returns true|true|
 
-##new q1s(options)
+## new q1s(options)
 |Option|Value|Default|Discription|Required|
 |:----|:----|:----|:----|:----|
 |createShadow|boolean|true|Add a shadow root to the element|true|
 |createdCallback|function|none|append or add a function the html created callback|false|
 |_proto|string/HTMLElement prototype|HTMLElement.prototype|Define the base prototype for the element. Can either be the prototype it self or the default tag name|false|
 
-##q1s.construct(options)
+## q1s.construct(options)
 |Option|Value|Default|Discription|Required|
 |:----|:----|:----|:----|:----|
 |attributes|object|none|Add addtributes to the created elem|false|
 
 
-####q1s.addFunctionToConstructCallback(func);
+#### q1s.addFunctionToConstructCallback(func);
 The functions are called in the order in which they were added to the component. They are always passed two variables:
 
 **elem**: the newly created element.
@@ -105,9 +105,9 @@ Produces:
   </body>
 ```
 
-###Methods:
+### Methods:
 These methods can be used either on the returned elem from q1s.construct() or in a function passed to q1s.addFunctionToConstructCallback(function)
-####elem.addStateBinding(key, _id, newElement, elem)###
+#### elem.addStateBinding(key, _id, newElement, elem)###
 **key (string):** 
 the state key to add a reactive function to. when elem.state[key] changes it will
 add and remove the appropriate elements created with newElement. It is expected
